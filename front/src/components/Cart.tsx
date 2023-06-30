@@ -27,7 +27,7 @@ const Cart = () => {
 		<CartContainer>
 			<ShoppingCart
 				size='24'
-				color='#737380'
+				color='var(--text-dark)'
 			/>
 			{value.length > 0 && <CartCount>{value.length}</CartCount>}
 		</CartContainer>

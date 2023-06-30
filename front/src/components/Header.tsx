@@ -11,13 +11,17 @@ const TagHeader = styled.header`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 2em;
+	padding: 1em 2em;
 
 	> div {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		gap: 24px;
+
+		svg {
+			cursor: pointer;
+		}
 	}
 `;
 
@@ -37,7 +41,7 @@ const Header = (props: IHeaderProps) => {
 				<Cart />
 				<ProfileCircle
 					size='24'
-					color='#737380'
+					color='var(--text-dark)'
 				/>
 			</div>
 		</TagHeader>

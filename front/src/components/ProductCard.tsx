@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 
 interface IProductCardProps {}
@@ -9,6 +10,7 @@ const Card = styled.div`
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	cursor: pointer;
 
 	border-radius: 4px;
 	background: rgba(255, 255, 255, 0.4);
@@ -49,10 +51,16 @@ const Line = styled.div`
 `;
 
 const ProductCard = (props: IProductCardProps) => {
+	const router = useRouter();
+
+	const handleNavigate = (id: number) => {
+		router.push(`/product?id=${id}`);
+	};
+
 	return (
-		<Card>
+		<Card onClick={() => handleNavigate(1)}>
 			<Image
-				src='https://fakeimg.pl/400x400'
+				src='https://fakeimg.pl/256x300'
 				width={256}
 				height={300}
 				alt='Picture of the author'

@@ -89,12 +89,12 @@ const FilterByPriority = (props: IFilterByPriorityProps) => {
 				{isOpen ? (
 					<ArrowUp2
 						size='24'
-						color='#737380'
+						color='var(--text-dark)'
 					/>
 				) : (
 					<ArrowDown2
 						size='24'
-						color='#737380'
+						color='var(--text-dark)'
 					/>
 				)}
 			</button>

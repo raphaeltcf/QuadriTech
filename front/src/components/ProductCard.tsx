@@ -10,10 +10,11 @@ const Card = styled.div`
 	justify-content: center;
 	flex-direction: column;
 
-	border-radius: 0px 0px 5px 4px;
+	border-radius: 4px;
 	background: rgba(255, 255, 255, 0.4);
 	backdrop-filter: blur(10px);
 	padding: 0 8px;
+	overflow: hidden;
 
 	width: 256px;
 

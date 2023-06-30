@@ -19,13 +19,17 @@ const List = styled.ul`
 const Item = styled.li<IFilterItemProps>`
 	font-family: inherit;
 	text-align: center;
-	font-size: 15px;
 	text-transform: uppercase;
+	font-size: 12px;
 	cursor: pointer;
 
 	border-bottom: ${(props) => (props.selected ? '4px solid #FFA585' : '')};
 	font-weight: ${(props) => (props.selected ? '700' : '400')};
 	color: ${(props) => (props.selected ? 'black' : 'var(--text-dark)')};
+
+	@media (min-width: ${(props) => props.theme.defaultBreakpoint}) {
+		font-size: 15px;
+	}
 `;
 
 const FilterByProduct = () => {

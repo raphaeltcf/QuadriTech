@@ -1,12 +1,22 @@
+'use client';
 import ProductsList from '@/components/ProductsList';
-import styles from './page.module.css';
 import FilterBar from '@/components/FilterBar';
+import styled from 'styled-components';
+
+const PageWrapper = styled.main`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 34px 2em;
+	min-height: calc(100vh - 100px);
+	background-color: var(--bg-primary);
+`;
 
 export default function Home() {
 	return (
-		<main className={styles.main}>
+		<PageWrapper>
 			<FilterBar />
 			<ProductsList />
-		</main>
+		</PageWrapper>
 	);
 }

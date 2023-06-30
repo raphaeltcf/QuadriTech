@@ -17,7 +17,7 @@ const FilterContainer = styled.div`
 		border: none;
 		font-family: inherit;
 		text-align: center;
-		font-size: 14px;
+		font-size: 12px;
 		cursor: pointer;
 
 		color: var(--text-dark);
@@ -27,12 +27,23 @@ const FilterContainer = styled.div`
 		align-items: center;
 
 		svg {
+			margin-left: 5px;
+		}
+	}
+
+	@media (min-width: ${(props) => props.theme.defaultBreakpoint}) {
+		button {
+			font-size: 14px;
+		}
+
+		svg {
 			margin-left: 15px;
 		}
 	}
 `;
 
 const PFilter = styled.ul`
+	z-index: 99;
 	position: absolute;
 	top: 100%;
 	right: 0;
@@ -74,7 +85,7 @@ const FilterByPriority = (props: IFilterByPriorityProps) => {
 	return (
 		<FilterContainer>
 			<button onClick={handleOpen}>
-				Organizar por{' '}
+				Organizar por
 				{isOpen ? (
 					<ArrowUp2
 						size='24'

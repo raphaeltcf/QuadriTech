@@ -19,6 +19,9 @@ const ProductsList = () => {
 			<ProductCard />
 			<ProductCard />
 			<ProductCard />
+			<ProductCard />
+			<ProductCard />
+			<ProductCard />
 		</ListContainer>
 	);
 };

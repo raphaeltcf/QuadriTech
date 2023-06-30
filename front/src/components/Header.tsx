@@ -3,6 +3,7 @@
 import { styled } from 'styled-components';
 import { PrimaryInputWIcon } from './PrimaryInput';
 import Cart from './Cart';
+import { ProfileCircle } from 'iconsax-react';
 
 interface IHeaderProps {}
 
@@ -34,6 +35,10 @@ const Header = (props: IHeaderProps) => {
 			<div>
 				<PrimaryInputWIcon placeholder='Procurando por algo específico?' />
 				<Cart />
+				<ProfileCircle
+					size='24'
+					color='#737380'
+				/>
 			</div>
 		</TagHeader>
 	);

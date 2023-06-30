@@ -49,6 +49,10 @@ const Container = styled.div`
 				font-size: 16px;
 				text-transform: uppercase;
 			}
+
+			button:hover {
+				opacity: 0.7;
+			}
 		}
 	}
 `;
@@ -106,6 +110,30 @@ const ProductInfo = styled.div`
 
 const Product = ({ searchParams }: { searchParams: { id: string } }) => {
 	console.log(searchParams);
+	const id = searchParams.id;
+
+	const data: { id: string; price: string } = { id: '2', price: '100' };
+
+	const handleAddToCart = () => {
+		let cartItems = localStorage.getItem('cart-items');
+		if (cartItems) {
+			let cartItemsArray = JSON.parse(cartItems);
+
+			let existingProductIndex = cartItemsArray.findIndex(
+				(item: { id: string }) => item.id === id
+			);
+
+			if (existingProductIndex !== -1) {
+				cartItemsArray[existingProductIndex].quantity += 1;
+			} else {
+				cartItemsArray.push({ ...data, id, quantity: 1 });
+			}
+			localStorage.setItem('cart-items', JSON.stringify(cartItemsArray));
+		} else {
+			const newCart = [{ ...data, quantity: 1, id }];
+			localStorage.setItem('cart-items', JSON.stringify(newCart));
+		}
+	};
 
 	return (
 		<DefaultPageLayout>
@@ -136,7 +164,7 @@ const Product = ({ searchParams }: { searchParams: { id: string } }) => {
 								</p>
 							</div>
 						</ProductInfo>
-						<button>
+						<button onClick={handleAddToCart}>
 							<ShoppingBag
 								size='24'
 								color='#fff'

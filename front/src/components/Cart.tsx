@@ -22,7 +22,9 @@ const CartContainer = styled.div`
 `;
 
 const Cart = () => {
-	const { value } = useLocalStorage('cart-items', ['1', '1']);
+	const { value } = useLocalStorage('cart-items', [
+		{ id: '2', price: '100', quantity: 1 },
+	]);
 	return (
 		<CartContainer>
 			<ShoppingCart

@@ -58,7 +58,7 @@ const ProductCard = (props: IProductCardProps) => {
 	};
 
 	return (
-		<Card onClick={() => handleNavigate(1)}>
+		<Card onClick={() => handleNavigate(2)}>
 			<Image
 				src='https://fakeimg.pl/256x300'
 				width={256}

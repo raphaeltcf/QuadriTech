@@ -1,34 +1,47 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, Query, NotFoundException } from '@nestjs/common';
 import { ProductService } from './product.service';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
+import { CreateProductDTO } from './dto/create-product.dto';
+import { FilterProductDTO } from './dto/filter-product.dto';
 
-@Controller('product')
+@Controller('store/products')
 export class ProductController {
-  constructor(private readonly productService: ProductService) {}
+  constructor(private productService: ProductService) { }
 
-  @Post()
-  create(@Body() createProductDto: CreateProductDto) {
-    return this.productService.create(createProductDto);
+  @Get('/')
+  async getProducts(@Query() filterProductDTO: FilterProductDTO) {
+    if (Object.keys(filterProductDTO).length) {
+      const filteredProducts = await this.productService.getFilteredProducts(filterProductDTO);
+      return filteredProducts;
+    } else {
+      const allProducts = await this.productService.getAllProducts();
+      return allProducts;
+    }
   }
 
-  @Get()
-  findAll() {
-    return this.productService.findAll();
+  @Get('/:id')
+  async getProduct(@Param('id') id: string) {
+    const product = await this.productService.getProduct(id);
+    if (!product) throw new NotFoundException('Product does not exist!');
+    return product;
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.productService.findOne(+id);
+  @Post('/')
+  async addProduct(@Body() createProductDTO: CreateProductDTO) {
+    const product = await this.productService.addProduct(createProductDTO);
+    return product;
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-    return this.productService.update(+id, updateProductDto);
+  @Put('/:id')
+  async updateProduct(@Param('id') id: string, @Body() createProductDTO: CreateProductDTO) {
+    const product = await this.productService.updateProduct(id, createProductDTO);
+    if (!product) throw new NotFoundException('Product does not exist!');
+    return product;
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.productService.remove(+id);
+  @Delete('/:id')
+  async deleteProduct(@Param('id') id: string) {
+    const product = await this.productService.deleteProduct(id);
+    if (!product) throw new NotFoundException('Product does not exist');
+    return product;
   }
 }

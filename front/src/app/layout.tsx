@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import './globals.css';
 import { Montserrat } from 'next/font/google';
+import { FilterContextProvider } from '@/contexts/FilterContext';
 
 const montserrat = Montserrat({
 	weight: ['300', '400', '500', '600'],
@@ -20,8 +21,10 @@ export default function RootLayout({
 	return (
 		<html lang='pt-BR'>
 			<body className={montserrat.className}>
-				<Header />
-				{children}
+				<FilterContextProvider>
+					<Header />
+					{children}
+				</FilterContextProvider>
 			</body>
 		</html>
 	);

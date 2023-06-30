@@ -1,34 +1,51 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
+import { AuthService } from './strategies/auth.service';
+import { UsersService } from 'src/users/users.service';
+import { LocalAuthGuard } from './guards/local.guard';
+import { JwtAuthGuard } from './guards/jwt.guard';
+import { Roles } from './decorators/roles.decorator';
+import { Role } from './enums/role.enum';
+import { RolesGuard } from './guards/roles.guard';
+import { CreateUserDTO } from 'src/users/dto/create-user.dto';
+import { User } from 'src/users/schemas/user.schema';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService, private readonly userService: UsersService) {}
 
-  @Post()
-  create(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
+  @Post('/register')
+  async register(@Body() createUserDTO: CreateUserDTO) {
+    const user = await this.userService.addUser(createUserDTO);
+    return user;
   }
 
-  @Get()
-  findAll() {
-    return this.authService.findAll();
+  @UseGuards(LocalAuthGuard)
+  @Post('/login')
+  async login(@Request() req) {
+    return this.authService.login(req.user);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.User)
+  @Get('/user')
+  getProfile(@Request() req) {
+    return req.user;
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authService.remove(+id);
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  @Get('/admin')
+  getDashboard(@Request() req) {
+    return req.user;
   }
 }

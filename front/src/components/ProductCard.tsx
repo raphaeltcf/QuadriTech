@@ -2,13 +2,11 @@
 import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 import Image from 'next/image';
-
-interface IProductCardProps {}
+import { IProductList } from '@/services/products/ProductsService';
 
 const Card = styled.div`
 	display: flex;
 	align-items: center;
-	justify-content: center;
 	flex-direction: column;
 	cursor: pointer;
 
@@ -19,6 +17,11 @@ const Card = styled.div`
 	overflow: hidden;
 
 	width: 256px;
+
+	img {
+		width: 256px;
+		height: 300px;
+	}
 
 	h3 {
 		color: rgba(0, 0, 0, 0.705);
@@ -48,25 +51,20 @@ const Line = styled.div`
 	padding: 0;
 	border-radius: 0px 0px 4px 4px;
 `;
-const ProductCard = (props: IProductCardProps) => {
+const ProductCard = (props: IProductList) => {
 	const router = useRouter();
 
-	const handleNavigate = (id: number) => {
-		router.push(`/product?id=${id}`);
+	const handleNavigate = () => {
+		router.push(`/product?id=${props.id}`);
 	};
 
 	return (
-		<Card onClick={() => handleNavigate(2)}>
-			<Image
-				src='https://fakeimg.pl/256x300'
-				width={256}
-				height={300}
-				alt='Picture of the author'
-			/>
+		<Card onClick={handleNavigate}>
+			<img src={props.image} />
 			<div>
-				<h3>Caneca de cerâmica rústica</h3>
+				<h3>{props.name}</h3>
 				<Line></Line>
-				<p>R$ 40,00</p>
+				<p>R$ {props.price}</p>
 			</div>
 		</Card>
 	);

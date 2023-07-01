@@ -1,0 +1,76 @@
+{
+	"products": [
+		{
+			"id": "1",
+			"name": "Notebook Gamer ASUS TUF",
+			"image": "https://dlcdnwebimgs.asus.com/files/media/dfe925d8-4d62-4f98-af97-aa10aed8baaa/v1/images/mobile/kv/kv.jpg",
+			"price": 5999.99,
+			"category": "Notebook",
+			"description": "Conheça a nova linha de notebooks gamer TUF Gaming, da ASUS, feita para aqueles que buscam performance em jogos competitivos e querem vencer todos os desafios do dia a dia. Preparado para qualquer campo de batalha, o novo ASUS TUF Gaming F15 supera os limites, seja jogando, fazendo livestreams ou em qualquer outra atividade. Graças ao poderoso processador Intel® Core™ i7-12700H com 14 núcleos, até as tarefas mais complicadas ficam simples."
+		},
+		{
+			"id": "2",
+			"name": "Smartphone XYZ-3000",
+			"image": "https://t2.tudocdn.net/656955?w=1200&h=1200",
+			"price": 999.99,
+			"category": "Smartphone",
+			"description": "O Smartphone XYZ-3000 é a mais recente inovação em tecnologia móvel. Com um design elegante e uma tela de alta resolução, este smartphone oferece uma experiência imersiva e clara. Equipado com um processador octa-core de última geração e 8 GB de RAM, o XYZ-3000 é capaz de lidar com qualquer tarefa com facilidade. Capture fotos e vídeos de alta qualidade com sua câmera traseira de 16 MP e compartilhe-os instantaneamente com seus amigos através da conectividade 5G."
+		},
+		{
+			"id": "3",
+			"name": "Smart TV Ultra HD 4K",
+			"image": "https://sc01.alicdn.com/kf/HTB1R2RBxcbpK1RjSZFyq6x_qFXaC/200160877/HTB1R2RBxcbpK1RjSZFyq6x_qFXaC.jpg_640x640q90.jpg_.webp",
+			"price": 1499.99,
+			"category": "TV",
+			"description": "A Smart TV Ultra HD 4K oferece uma experiência visual incrível com sua tela de alta resolução e tecnologia HDR. Assista aos seus filmes e séries favoritos em cores vivas e detalhes nítidos. A TV possui um sistema operacional inteligente que permite o acesso a diversos aplicativos de streaming, como Netflix e Prime Video. Além disso, sua conectividade Wi-Fi integrada permite que você navegue na web e acesse conteúdos online com facilidade. Compatível com assistentes de voz, você pode controlar a TV usando comandos de voz."
+		},
+		{
+			"id": "4",
+			"name": "Câmera DSLR Profissional",
+			"image": "https://ae01.alicdn.com/kf/S55eadcc27ddf4be5a883f6e3ff6e4010A.jpg_640x640Q90.jpg_.webp",
+			"price": 2999.99,
+			"category": "Câmera",
+			"description": "A Câmera DSLR Profissional é perfeita para fotógrafos e entusiastas da fotografia que desejam capturar imagens de alta qualidade. Equipada com um sensor de imagem avançado e uma ampla faixa de sensibilidade ISO, esta câmera oferece imagens claras e detalhadas em diferentes condições de iluminação. Ela também possui diversos modos de disparo, lentes intercambiáveis e recursos de gravação de vídeo em resolução 4K. Seja fotografando paisagens deslumbrantes ou retratos emocionantes, esta câmera atenderá às suas necessidades criativas."
+		},
+		{
+			"id": "5",
+			"name": "Fone de Ouvido Bluetooth",
+			"image": "https://images.tcdn.com.br/img/img_prod/709481/fone_de_ouvido_bluetooth_sem_fio_fm_mp3_microfone_micro_sd_2691_1_7af64ec19695e1ff8d32ecd86030a76b.jpg",
+			"price": 199.99,
+			"category": "Acessórios",
+			"description": "O Fone de Ouvido Bluetooth oferece liberdade sem fios para desfrutar da sua música favorita. Com conectividade Bluetooth estável, você pode conectar-se facilmente ao seu smartphone ou dispositivo de áudio. Possui drivers de alta qualidade que proporcionam um som nítido e envolvente. Além disso, é equipado com microfone embutido para chamadas telefônicas e controle de reprodução integrado para facilitar o ajuste do volume e a troca de faixas. Com design confortável e bateria de longa duração, você pode desfrutar da sua música por horas a fio."
+		},
+		{
+			"id": "6",
+			"name": "Monitor Gamer UltraWide",
+			"image": "https://images.kabum.com.br/produtos/fotos/390500/monitor-gamer-samsung-odyssey-ark-curvo-55-4k-uhd-led-165hz-1ms-hdmi-e-displayport-freesync-premium-ajuste-de-altura-ls55bg970nlxzd_1665172187_g.jpg",
+			"price": 799.99,
+			"category": "Monitor",
+			"description": "O Monitor Gamer UltraWide oferece uma experiência imersiva para jogadores que buscam a melhor performance. Com uma tela ampla e curva, este monitor proporciona um campo de visão expandido e maior detalhamento. Sua taxa de atualização de 144Hz e tempo de resposta de 1ms garantem imagens suaves e sem borrões, ideal para jogos de alta ação. Além disso, possui tecnologia HDR para cores vibrantes e contraste aprimorado. Com conectividade HDMI e DisplayPort, é compatível com PCs e consoles, oferecendo uma experiência de jogo excepcional."
+		},
+		{
+			"id": "7",
+			"name": "Impressora Multifuncional Wi-Fi",
+			"image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqwdnFPhaoDjqCFEpd2sOJivJiH1OGMpLvwQ&usqp=CAU",
+			"price": 249.99,
+			"category": "Impressora",
+			"description": "A Impressora Multifuncional Wi-Fi é a solução perfeita para suas necessidades de impressão, cópia e digitalização. Com conectividade sem fio, você pode imprimir facilmente a partir de dispositivos móveis ou computadores. Possui uma bandeja de papel de alta capacidade e velocidades de impressão rápidas, garantindo eficiência e produtividade. Além disso, possui recursos avançados, como impressão frente e verso automática e opções de digitalização para e-mail ou nuvem. Seja para uso doméstico ou no escritório, essa impressora irá atender às suas demandas de forma conveniente."
+		},
+		{
+			"id": "8",
+			"name": "Teclado Mecânico RGB",
+			"image": "https://dlcdnwebimgs.asus.com/files/media/dfe925d8-4d62-4f98-af97-aa10aed8baaa/v1/images/mobile/kv/kv.jpg",
+			"price": 129.99,
+			"category": "Acessórios",
+			"description": "O Teclado Mecânico RGB oferece uma experiência de digitação precisa e confortável. Equipado com teclas mecânicas duráveis e retroiluminação RGB personalizável, este teclado combina estilo e desempenho. Com uma estrutura resistente e design ergonômico, proporciona conforto durante longas sessões de digitação ou jogos. Além disso, possui teclas programáveis e opções de macros para personalizar suas configurações. Seja para trabalho ou diversão, este teclado irá atender às necessidades dos usuários mais exigentes."
+		},
+		{
+			"id": "9",
+			"name": "Roteador Wi-Fi Gigabit",
+			"image": "https://dlcdnwebimgs.asus.com/files/media/dfe925d8-4d62-4f98-af97-aa10aed8baaa/v1/images/mobile/kv/kv.jpg",
+			"price": 79.99,
+			"category": "Rede",
+			"description": "O Roteador Wi-Fi Gigabit oferece uma conexão rápida e estável para suas necessidades de rede. Com velocidades de transferência de dados de até 1 Gbps, você pode desfrutar de streaming de vídeo em alta definição, jogos online sem interrupções e transferência de arquivos em alta velocidade. Equipado com tecnologia de beamforming e antenas externas, este roteador melhora o alcance e a cobertura do sinal Wi-Fi. Além disso, possui portas Gigabit Ethernet para conexões com fio e opções avançadas de segurança para proteger sua rede contra ameaças."
+		}
+	]
+}

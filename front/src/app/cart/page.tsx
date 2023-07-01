@@ -4,6 +4,7 @@ import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { BackButton } from '@/components/BackButton';
 import CartItem from '@/components/Cart/CartItem';
 import { styled } from 'styled-components';
+import { IProductInCart } from '@/services/products/ProductsService';
 
 const Container = styled.div`
 	display: flex;
@@ -107,7 +108,25 @@ const ShopBtn = styled.button`
 `;
 
 const CartPage = () => {
-	const { value, updateLocalStorage } = useLocalStorage('cart-items', []);
+	const { value, updateLocalStorage } = useLocalStorage<IProductInCart[]>(
+		'cart-items',
+		[]
+	);
+
+	const handleUpdateQuantity = (id: string, cart_quantity: number) => {
+		const newValue = value.map((item) => {
+			if (item.id !== id) return item;
+			return { ...item, cart_quantity };
+		});
+		updateLocalStorage(newValue);
+	};
+
+	const handleDeleteItem = (id: string) => {
+		const newValue = value.filter((item) => {
+			if (item.id !== id) return item;
+		});
+		updateLocalStorage(newValue);
+	};
 
 	return (
 		<DefaultPageLayout>
@@ -120,9 +139,14 @@ const CartPage = () => {
 						<span>R$ 50,00</span>
 					</p>
 					<CartList>
-						<CartItem />
-						<CartItem />
-						<CartItem />
+						{value.map((item) => (
+							<CartItem
+								product={item}
+								key={item.id}
+								handleDelete={handleDeleteItem}
+								handleUpdateQuantity={handleUpdateQuantity}
+							/>
+						))}
 					</CartList>
 				</CartListContainer>
 				<CartResultContainer>

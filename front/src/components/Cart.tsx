@@ -25,9 +25,7 @@ const CartContainer = styled.div`
 const Cart = () => {
 	const router = useRouter();
 
-	const { value } = useLocalStorage('cart-items', [
-		{ id: '2', price: '100', quantity: 1 },
-	]);
+	const { value } = useLocalStorage('cart-items', []);
 
 	const handleNavigateToCart = () => {
 		router.push('/cart');

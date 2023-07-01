@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
-import Image from 'next/image';
+
 import { IProductList } from '@/services/products/ProductsService';
 
 const Card = styled.div`

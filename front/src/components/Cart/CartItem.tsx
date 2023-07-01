@@ -1,8 +1,14 @@
 import styled from 'styled-components';
 import { Trash } from 'iconsax-react';
-import Image from 'next/image';
 
-interface ICartItem {}
+import { IProductInCart } from '@/services/products/ProductsService';
+import { ChangeEvent } from 'react';
+
+interface ICartItemProps {
+	product: IProductInCart;
+	handleUpdateQuantity(id: string, cart_quantity: number): void;
+	handleDelete(id: string): void;
+}
 
 const Item = styled.li`
 	display: flex;
@@ -16,7 +22,9 @@ const Item = styled.li`
 	background-color: white;
 
 	img {
-		max-height: 100%;
+		min-width: 256px;
+		height: 100%;
+		border-radius: 8px 0 0 8px;
 	}
 
 	> div {
@@ -78,19 +86,24 @@ const SelectQuantity = styled.select`
 	font-size: 16px;
 `;
 
-const CartItem = (props: ICartItem) => {
+const CartItem = ({
+	product,
+	handleUpdateQuantity,
+	handleDelete,
+}: ICartItemProps) => {
+	const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+		handleUpdateQuantity(product.id, Number(e.target.value));
+	};
 	return (
 		<Item>
-			<Image
-				src='https://fakeimg.pl/256x211'
-				width={256}
-				height={211}
-				alt='Picture of the author'
-			/>
+			<img src={product.image} />
 			<div>
 				<h4>Caneca de cerâmica rústica</h4>
 
-				<button>
+				<button
+					onClick={() => handleDelete(product.id)}
+					aria-label='Deletar'
+				>
 					<Trash
 						size='24'
 						color='var(--delete-color'
@@ -102,12 +115,15 @@ const CartItem = (props: ICartItem) => {
 					nesse campo, descrevendo tal produto.
 				</p>
 				<div>
-					<SelectQuantity>
-						<option value='1'>1</option>
-						<option value='2'>2</option>
-						<option value='3'>3</option>
-						<option value='4'>4</option>
-						<option value='5'>5</option>
+					<SelectQuantity
+						value={product.cart_quantity}
+						onChange={handleChange}
+					>
+						<option value={1}>1</option>
+						<option value={2}>2</option>
+						<option value={3}>3</option>
+						<option value={4}>4</option>
+						<option value={5}>5</option>
 					</SelectQuantity>
 					<span>R$ 50,00 </span>
 				</div>

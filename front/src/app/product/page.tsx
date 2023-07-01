@@ -1,11 +1,13 @@
 'use client';
 import { BackButton } from '@/components/BackButton';
 import { DefaultPageLayout } from '@/components/DefaultPageLayout';
+import {
+	IProductDetail,
+	ProductsService,
+} from '@/services/products/ProductsService';
 import { ShoppingBag } from 'iconsax-react';
-import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
-
-interface ProductProps {}
 
 const Container = styled.div`
 	display: flex;
@@ -19,11 +21,17 @@ const Container = styled.div`
 		width: 100%;
 		gap: 32px;
 		margin-top: 24px;
+		flex-direction: column;
 
 		img {
 			border-radius: 5px;
 			max-width: 640px;
-			width: 50%;
+			width: 100%;
+
+			@media (min-width: ${(props) => props.theme.defaultBreakpoint}) {
+				width: 50%;
+				font-size: 16px;
+			}
 		}
 
 		> div {
@@ -46,13 +54,21 @@ const Container = styled.div`
 				padding: 10px 0;
 				text-align: center;
 				font-weight: 500;
-				font-size: 16px;
+				font-size: 12px;
 				text-transform: uppercase;
+
+				@media (min-width: ${(props) => props.theme.defaultBreakpoint}) {
+					font-size: 16px;
+				}
 			}
 
 			button:hover {
 				opacity: 0.7;
 			}
+		}
+
+		@media (min-width: ${(props) => props.theme.defaultBreakpoint}) {
+			flex-direction: row;
 		}
 	}
 `;
@@ -100,9 +116,12 @@ const ProductInfo = styled.div`
 		}
 
 		p {
-			margin-top: 8px;
+			margin: 8px 0;
 			font-size: 14px;
 			color: var(--text-dark-2);
+		}
+
+		@media (min-width: ${(props) => props.theme.defaultBreakpoint}) {
 			max-width: 448px;
 		}
 	}
@@ -112,7 +131,17 @@ const Product = ({ searchParams }: { searchParams: { id: string } }) => {
 	console.log(searchParams);
 	const id = searchParams.id;
 
-	const data: { id: string; price: string } = { id: '2', price: '100' };
+	const [data, setData] = useState<IProductDetail>();
+
+	useEffect(() => {
+		ProductsService.getById(Number(id)).then((result) => {
+			if (result instanceof Error) {
+				alert(result.message);
+			} else {
+				setData(result);
+			}
+		});
+	}, []);
 
 	const handleAddToCart = () => {
 		let cartItems = localStorage.getItem('cart-items');
@@ -124,13 +153,13 @@ const Product = ({ searchParams }: { searchParams: { id: string } }) => {
 			);
 
 			if (existingProductIndex !== -1) {
-				cartItemsArray[existingProductIndex].quantity += 1;
+				cartItemsArray[existingProductIndex].cart_quantity += 1;
 			} else {
-				cartItemsArray.push({ ...data, id, quantity: 1 });
+				cartItemsArray.push({ ...data, id, cart_quantity: 1 });
 			}
 			localStorage.setItem('cart-items', JSON.stringify(cartItemsArray));
 		} else {
-			const newCart = [{ ...data, quantity: 1, id }];
+			const newCart = [{ ...data, cart_quantity: 1, id }];
 			localStorage.setItem('cart-items', JSON.stringify(newCart));
 		}
 	};
@@ -140,16 +169,11 @@ const Product = ({ searchParams }: { searchParams: { id: string } }) => {
 			<Container>
 				<BackButton navigate='/' />
 				<section>
-					<Image
-						src='https://fakeimg.pl/640x640'
-						width={400}
-						height={400}
-						alt='Picture of the author'
-					/>
+					<img src={data?.image} />
 					<div>
 						<ProductInfo>
-							<span> Caneca</span>
-							<h2> Caneca de cerâmica rústica</h2>
+							<span>{data?.category}</span>
+							<h2>{data?.name}</h2>
 							<span>R$ 40,00</span>
 							<p>
 								*Frete de R$40,00 para todo o Brasil. Grátis para compras acima
@@ -157,11 +181,7 @@ const Product = ({ searchParams }: { searchParams: { id: string } }) => {
 							</p>
 							<div>
 								<h3>Descrição</h3>
-								<p>
-									Aqui vem um texto descritivo do produto, esta caixa de texto
-									servirá apenas de exemplo para que simule algum texto que
-									venha a ser inserido nesse campo, descrevendo tal produto.
-								</p>
+								<p>{data?.description}</p>
 							</div>
 						</ProductInfo>
 						<button onClick={handleAddToCart}>

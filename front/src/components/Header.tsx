@@ -5,8 +5,7 @@ import { styled } from 'styled-components';
 
 import { PrimaryInputWIcon } from './PrimaryInput';
 import Cart from './Cart';
-
-interface IHeaderProps {}
+import useWindowDimensions from 'use-window-dimensions';
 
 const TagHeader = styled.header`
 	display: flex;
@@ -38,12 +37,17 @@ const Logo = styled.a`
 	}
 `;
 
-const Header = (props: IHeaderProps) => {
+const Header = () => {
+	const { width } = useWindowDimensions();
+
 	return (
 		<TagHeader>
 			<Logo href='/'>QUADRITECH</Logo>
 			<div>
-				<PrimaryInputWIcon placeholder='Procurando por algo específico?' />
+				{width > 768 && (
+					<PrimaryInputWIcon placeholder='Procurando por algo específico?' />
+				)}
+
 				<Cart />
 				<ProfileCircle
 					size='24'

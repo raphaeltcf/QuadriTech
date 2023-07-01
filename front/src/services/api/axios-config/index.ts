@@ -2,7 +2,7 @@ import axios from 'axios';
 import { errorInterceptor, responseInterceptor } from './interceptors';
 
 const Api = axios.create({
-	baseURL: process.env.NEXT_URL_BASE,
+	baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 Api.interceptors.response.use(

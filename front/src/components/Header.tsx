@@ -1,9 +1,10 @@
 'use client';
 
+import { ProfileCircle } from 'iconsax-react';
 import { styled } from 'styled-components';
+
 import { PrimaryInputWIcon } from './PrimaryInput';
 import Cart from './Cart';
-import { ProfileCircle } from 'iconsax-react';
 
 interface IHeaderProps {}
 
@@ -30,12 +31,17 @@ const Logo = styled.a`
 	font-weight: bolder;
 	font-size: 1.5em;
 	cursor: pointer;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
 `;
 
 const Header = (props: IHeaderProps) => {
 	return (
 		<TagHeader>
-			<Logo>QUADRITECH</Logo>
+			<Logo href='/'>QUADRITECH</Logo>
 			<div>
 				<PrimaryInputWIcon placeholder='Procurando por algo específico?' />
 				<Cart />

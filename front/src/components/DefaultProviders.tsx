@@ -1,8 +1,9 @@
 'use client';
 
-import { FilterContextProvider } from '@/contexts/FilterContext';
-import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
+import { ReactNode } from 'react';
+
+import { FilterContextProvider } from '@/contexts/FilterContext';
 
 interface IDefaultProvidersProps {
 	children: ReactNode;

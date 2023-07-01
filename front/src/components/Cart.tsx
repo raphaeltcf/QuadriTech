@@ -1,8 +1,9 @@
 'use client';
 
-import { styled } from 'styled-components';
-import { ShoppingCart } from 'iconsax-react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { ShoppingCart } from 'iconsax-react';
+import { useRouter } from 'next/navigation';
+import { styled } from 'styled-components';
 
 const CartCount = styled.span`
 	background-color: var(--delete-color);
@@ -22,11 +23,18 @@ const CartContainer = styled.div`
 `;
 
 const Cart = () => {
+	const router = useRouter();
+
 	const { value } = useLocalStorage('cart-items', [
 		{ id: '2', price: '100', quantity: 1 },
 	]);
+
+	const handleNavigateToCart = () => {
+		router.push('/cart');
+	};
+
 	return (
-		<CartContainer>
+		<CartContainer onClick={handleNavigateToCart}>
 			<ShoppingCart
 				size='24'
 				color='var(--text-dark)'

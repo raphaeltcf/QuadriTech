@@ -1,9 +1,10 @@
-import { FilterContext } from '@/contexts/FilterContext';
-import { useFilter } from '@/hooks/useFilter';
-import { PriorityType } from '@/types/PriorityTypes';
 import { ArrowUp2, ArrowDown2 } from 'iconsax-react';
 import { useContext, useState } from 'react';
 import styled from 'styled-components';
+
+import { FilterContext } from '@/contexts/FilterContext';
+import { PriorityType } from '@/types/PriorityTypes';
+import { useFilter } from '@/hooks/useFilter';
 
 interface IFilterByPriorityProps {}
 

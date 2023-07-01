@@ -1,7 +1,7 @@
 'use client';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
+import Image from 'next/image';
 
 interface IProductCardProps {}
 
@@ -41,7 +41,6 @@ const Card = styled.div`
 		flex-direction: column;
 	}
 `;
-
 const Line = styled.div`
 	width: 90%;
 	height: 1px;
@@ -49,7 +48,6 @@ const Line = styled.div`
 	padding: 0;
 	border-radius: 0px 0px 4px 4px;
 `;
-
 const ProductCard = (props: IProductCardProps) => {
 	const router = useRouter();
 

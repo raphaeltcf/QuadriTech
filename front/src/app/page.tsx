@@ -1,9 +1,10 @@
 'use client';
+import styled from 'styled-components';
+import Image from 'next/image';
+
+import { DefaultPageLayout } from '@/components/DefaultPageLayout';
 import ProductsList from '@/components/ProductsList';
 import FilterBar from '@/components/FilterBar';
-import styled from 'styled-components';
-import { DefaultPageLayout } from '@/components/DefaultPageLayout';
-import Image from 'next/image';
 
 const PageWrapper = styled.main`
 	display: flex;

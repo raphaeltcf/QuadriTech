@@ -1,7 +1,6 @@
 'use client';
-import { useFilter } from '@/hooks/useFilter';
 import { FilterType } from '@/types/FilterTypes';
-import React from 'react';
+import { useFilter } from '@/hooks/useFilter';
 import { styled } from 'styled-components';
 
 interface IFilterItemProps {

@@ -1,7 +1,7 @@
 'use client';
-import styled from 'styled-components';
-import FilterByProduct from './FilterByProduct';
 import FilterByPriority from './FilterByPriority';
+import FilterByProduct from './FilterByProduct';
+import styled from 'styled-components';
 
 interface IFilterBarProps {}
 

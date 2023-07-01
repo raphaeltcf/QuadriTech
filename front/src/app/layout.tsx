@@ -1,8 +1,9 @@
-import Header from '@/components/Header';
-import './globals.css';
 import { Montserrat } from 'next/font/google';
+import './globals.css';
+
 import { FilterContextProvider } from '@/contexts/FilterContext';
 import DefaultProviders from '@/components/DefaultProviders';
+import Header from '@/components/Header';
 
 const montserrat = Montserrat({
 	weight: ['300', '400', '500', '600'],

@@ -7,8 +7,8 @@ import { styled } from 'styled-components';
 import { ChangeEvent, useMemo } from 'react';
 
 import { PrimaryInputWIcon } from './PrimaryInput';
-import Cart from './Cart';
 import { useParams } from '@/hooks/useParams';
+import Cart from './Cart';
 
 const TagHeader = styled.header`
 	display: flex;
@@ -45,15 +45,14 @@ const Header = () => {
 
 	const pathname = usePathname();
 	const searchParams = useSearchParams()!;
-	const router = useRouter();
 
-	const { createQueryString } = useParams();
+	const { changeURL } = useParams();
 
 	const handleChange = (
 		query: string,
 		event: ChangeEvent<HTMLInputElement | undefined>
 	) => {
-		router.push(pathname + '?' + createQueryString(query, event.target.value));
+		changeURL(query, event.target.value);
 	};
 
 	const search = useMemo(() => {

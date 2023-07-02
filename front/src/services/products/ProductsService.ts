@@ -1,3 +1,7 @@
+import { getCategoryByType, getFieldByPriority } from '@/utils/api-filters';
+import { PriorityType } from '@/types/PriorityTypes';
+import { FilterType } from '@/types/FilterTypes';
+import { useFilter } from '@/hooks/useFilter';
 import { Api } from '../api/axios-config';
 
 export interface IProductList {
@@ -27,10 +31,14 @@ type TProductListWTotalCount = {
 
 const getAll = async (
 	page = 1,
-	filter = ''
+	filter = '',
+	type = FilterType.ALL,
+	priority = PriorityType.NEWS
 ): Promise<TProductListWTotalCount | Error> => {
 	try {
-		const url = `/products?_page=${page}&_limit=${process.env.NEXT_PUBLIC_PAGE_LIMIT}&name_like=${filter}`;
+		const category = getCategoryByType(type);
+		const sort = getFieldByPriority(priority);
+		const url = `/products?_page=${page}&_limit=${process.env.NEXT_PUBLIC_PAGE_LIMIT}&name_like=${filter}&category_like=${category}&_sort=${sort.field}&_order=${sort.order}`;
 
 		const { headers, data } = await Api.get(url);
 

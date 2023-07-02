@@ -128,7 +128,6 @@ const ProductInfo = styled.div`
 `;
 
 const Product = ({ searchParams }: { searchParams: { id: string } }) => {
-	console.log(searchParams);
 	const id = searchParams.id;
 
 	const [data, setData] = useState<IProductDetail>();

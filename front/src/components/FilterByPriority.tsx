@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { FilterContext } from '@/contexts/FilterContext';
 import { PriorityType } from '@/types/PriorityTypes';
 import { useFilter } from '@/hooks/useFilter';
+import { useParams } from '@/hooks/useParams';
 
 interface IFilterByPriorityProps {}
 
@@ -73,6 +74,7 @@ const PFilter = styled.ul`
 const FilterByPriority = (props: IFilterByPriorityProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const { setPriority } = useFilter();
+	const { changeURL } = useParams();
 
 	const handleOpen = () => {
 		setIsOpen((oldValue) => !oldValue);
@@ -80,6 +82,7 @@ const FilterByPriority = (props: IFilterByPriorityProps) => {
 
 	const handleUpdatePriority = (value: PriorityType) => {
 		setPriority(value);
+		changeURL('priority', String(value));
 		setIsOpen(false);
 	};
 

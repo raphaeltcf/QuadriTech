@@ -1,7 +1,9 @@
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';
 
 export function useParams() {
+	const router = useRouter();
+	const pathname = usePathname();
 	const searchParams = useSearchParams()!;
 
 	const createQueryString = useCallback(
@@ -10,7 +12,7 @@ export function useParams() {
 
 			params.set(name, value);
 
-			if (name === 'search') {
+			if (name !== 'page') {
 				params.set('page', '1');
 			}
 
@@ -19,5 +21,9 @@ export function useParams() {
 		[searchParams]
 	);
 
-	return { createQueryString };
+	const changeURL = (name: string, value: string) => {
+		router.push(pathname + '?' + createQueryString(name, value));
+	};
+
+	return { changeURL, createQueryString };
 }

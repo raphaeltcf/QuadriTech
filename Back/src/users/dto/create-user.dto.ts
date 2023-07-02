@@ -3,4 +3,5 @@ export class CreateUserDTO {
     email: string;
     password: string;
     perfilUrl: string;
+    roles: string[];
 }

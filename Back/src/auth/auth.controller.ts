@@ -3,9 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Patch,
-  Param,
-  Delete,
   UseGuards,
   Request,
 } from '@nestjs/common';
@@ -17,7 +14,6 @@ import { Roles } from './decorators/roles.decorator';
 import { Role } from './enums/role.enum';
 import { RolesGuard } from './guards/roles.guard';
 import { CreateUserDTO } from 'src/users/dto/create-user.dto';
-import { User } from 'src/users/schemas/user.schema';
 
 @Controller('auth')
 export class AuthController {

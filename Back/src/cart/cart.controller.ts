@@ -1,13 +1,19 @@
-import { Controller, Post, Body, Request, UseGuards, Delete, NotFoundException, Param } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Request,
+  UseGuards,
+  Delete,
+  NotFoundException,
+  Param,
+} from '@nestjs/common';
 import { CartService } from './cart.service';
-import { CreateCartDto } from './dto/create-cart.dto';
-import { UpdateCartDto } from './dto/update-cart.dto';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { ItemDTO } from './dto/item.dto';
-
 
 @Controller('cart')
 export class CartController {
@@ -16,6 +22,15 @@ export class CartController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.User)
   @Post('/')
+  async addItemToCart(@Request() req, @Body() itemDTO: ItemDTO) {
+    const userId = req.user.userId;
+    const cart = await this.cartService.addItemToCart(userId, itemDTO);
+    return cart;
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.User)
+  @Post('/remove')
   async removeItemFromCart(@Request() req, @Body() { productId }) {
     const userId = req.user.userId;
     const cart = await this.cartService.removeItemFromCart(userId, productId);

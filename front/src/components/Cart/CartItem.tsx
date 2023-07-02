@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { Trash } from 'iconsax-react';
+import { ChangeEvent } from 'react';
 
 import { IProductInCart } from '@/services/products/ProductsService';
-import { ChangeEvent } from 'react';
 
 interface ICartItemProps {
 	product: IProductInCart;

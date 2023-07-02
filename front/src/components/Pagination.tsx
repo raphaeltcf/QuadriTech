@@ -1,6 +1,6 @@
 import { ArrowLeft2, ArrowRight2 } from 'iconsax-react';
-import React from 'react';
 import { styled } from 'styled-components';
+import React from 'react';
 
 interface IPaginationProps {
 	count: number;

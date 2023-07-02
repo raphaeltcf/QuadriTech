@@ -1,7 +1,9 @@
 'use client';
+import { styled } from 'styled-components';
+
 import { FilterType } from '@/types/FilterTypes';
 import { useFilter } from '@/hooks/useFilter';
-import { styled } from 'styled-components';
+import { useParams } from '@/hooks/useParams';
 
 interface IFilterItemProps {
 	selected: boolean;
@@ -34,8 +36,10 @@ const Item = styled.li<IFilterItemProps>`
 
 const FilterByProduct = () => {
 	const { type, setType } = useFilter();
+	const { changeURL } = useParams();
 
 	const handleChangeType = (value: FilterType) => {
+		changeURL('type', String(value));
 		setType(value);
 	};
 

@@ -38,7 +38,7 @@ const getAll = async (
 			return {
 				data,
 				totalCount: Number(
-					headers['X-Total-Count'] || process.env.NEXT_PUBLIC_PAGE_LIMIT
+					headers['x-total-count'] || process.env.NEXT_PUBLIC_PAGE_LIMIT
 				),
 			};
 		}

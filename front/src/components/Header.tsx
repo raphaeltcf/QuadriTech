@@ -4,10 +4,11 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import useWindowDimensions from 'use-window-dimensions';
 import { ProfileCircle } from 'iconsax-react';
 import { styled } from 'styled-components';
-import { ChangeEvent, useCallback, useMemo } from 'react';
+import { ChangeEvent, useMemo } from 'react';
 
 import { PrimaryInputWIcon } from './PrimaryInput';
 import Cart from './Cart';
+import { useParams } from '@/hooks/useParams';
 
 const TagHeader = styled.header`
 	display: flex;
@@ -42,27 +43,22 @@ const Logo = styled.a`
 const Header = () => {
 	const { width } = useWindowDimensions();
 
-	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams()!;
+	const router = useRouter();
+
+	const { createQueryString } = useParams();
+
+	const handleChange = (
+		query: string,
+		event: ChangeEvent<HTMLInputElement | undefined>
+	) => {
+		router.push(pathname + '?' + createQueryString(query, event.target.value));
+	};
 
 	const search = useMemo(() => {
 		return searchParams.get('search') || '';
 	}, [searchParams]);
-
-	const createQueryString = useCallback(
-		(name: string, value: string) => {
-			const params = new URLSearchParams(Array.from(searchParams.entries()));
-			params.set(name, value);
-
-			return params.toString();
-		},
-		[searchParams]
-	);
-
-	const handleChange = (e: ChangeEvent<HTMLInputElement | undefined>) => {
-		router.push(pathname + '?' + createQueryString('search', e.target.value));
-	};
 
 	return (
 		<TagHeader>
@@ -72,7 +68,7 @@ const Header = () => {
 					<PrimaryInputWIcon
 						placeholder='Procurando por algo específico?'
 						value={search}
-						onChange={handleChange}
+						onChange={(event) => handleChange('search', event)}
 					/>
 				)}
 				<Cart />

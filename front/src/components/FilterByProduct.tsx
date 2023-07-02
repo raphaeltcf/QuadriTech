@@ -22,7 +22,8 @@ const Item = styled.li<IFilterItemProps>`
 	font-size: 12px;
 	cursor: pointer;
 
-	border-bottom: ${(props) => (props.selected ? '4px solid #FFA585' : '')};
+	border-bottom: ${(props) =>
+		props.selected ? '4px solid var(--text-orange)' : ''};
 	font-weight: ${(props) => (props.selected ? '700' : '400')};
 	color: ${(props) => (props.selected ? 'black' : 'var(--text-dark)')};
 

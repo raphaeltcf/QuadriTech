@@ -29,7 +29,7 @@ const Container = styled.div`
 			width: 100%;
 
 			@media (min-width: ${(props) => props.theme.defaultBreakpoint}) {
-				width: 50%;
+				max-height: 50%;
 				font-size: 16px;
 			}
 		}

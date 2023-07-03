@@ -1,6 +1,6 @@
 # 🛍 QuadriTech
 
-Uma E-commerce de equipamentos Eletronicos feito utilizando os Frameworks RestJS no back e NextJS no Front, os dois com TypeScript e Banco de Dados feito em MongoDB.
+Um E-commerce de equipamentos Eletronicos feito utilizando os Frameworks RestJS no back e NextJS no Front, os dois com TypeScript e Banco de Dados feito em MongoDB.
 Isso é uma colaboração que está sendo feita entre eu e Gabriel Feijo, onde eu estou produzindo o back e ele o front. 
 
 

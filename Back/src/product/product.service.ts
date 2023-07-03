@@ -21,18 +21,17 @@ export class ProductService {
     if (search) {
       products = products.filter(
         (product) =>
-          product.name.includes(search) ||
-          product.description.includes(search),
+          product.name.includes(search) || product.description.includes(search),
       );
     }
     if (category) {
-      products = products.filter(product => product.category === category)
+      products = products.filter((product) => product.category === category);
     }
     return products;
   }
 
   async getAllProducts(): Promise<Product[]> {
-    const products = await this.productModel.find().exec();
+    const products = await this.productModel.find().sort({_id: 1}).populate('category').populate('name').exec();
     return products;
   }
 
@@ -46,9 +45,15 @@ export class ProductService {
     return newProduct.save();
   }
 
-  async updateProduct(id: string, createProductDTO: CreateProductDTO): Promise<Product> {
-    const updatedProduct = await this.productModel
-      .findByIdAndUpdate(id, createProductDTO, { new: true });
+  async updateProduct(
+    id: string,
+    createProductDTO: CreateProductDTO,
+  ): Promise<Product> {
+    const updatedProduct = await this.productModel.findByIdAndUpdate(
+      id,
+      createProductDTO,
+      { new: true },
+    );
     return updatedProduct;
   }
 

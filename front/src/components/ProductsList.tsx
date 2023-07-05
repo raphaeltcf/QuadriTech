@@ -3,7 +3,7 @@
 import {
 	IProductList,
 	ProductsService,
-} from '@/services/products/ProductsService';
+} from '@/services/api/products/ProductsService';
 import { useMemo, useEffect, useState } from 'react';
 import Pagination from '@/components/Pagination';
 import { useSearchParams } from 'next/navigation';

@@ -4,7 +4,7 @@ import { DefaultPageLayout } from '@/components/DefaultPageLayout';
 import {
 	IProductDetail,
 	ProductsService,
-} from '@/services/products/ProductsService';
+} from '@/services/api/products/ProductsService';
 import { ShoppingBag } from 'iconsax-react';
 import { useEffect, useState } from 'react';
 import { styled } from 'styled-components';

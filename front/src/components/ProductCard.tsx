@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 
-import { IProductList } from '@/services/products/ProductsService';
+import { IProductList } from '@/services/api/products/ProductsService';
 
 const Card = styled.div`
 	display: flex;

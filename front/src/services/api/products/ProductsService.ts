@@ -2,7 +2,7 @@ import { getCategoryByType, getFieldByPriority } from '@/utils/api-filters';
 import { PriorityType } from '@/types/PriorityTypes';
 import { FilterType } from '@/types/FilterTypes';
 import { useFilter } from '@/hooks/useFilter';
-import { Api } from '../api/axios-config';
+import { Api } from '../axios-config';
 
 export interface IProductList {
 	id: string;

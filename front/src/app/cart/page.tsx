@@ -2,9 +2,9 @@
 import { DefaultPageLayout } from '@/components/DefaultPageLayout';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { BackButton } from '@/components/BackButton';
-import CartItem from '@/components/cart/CartItem';
 import { styled } from 'styled-components';
 import { IProductInCart } from '@/services/api/products/ProductsService';
+import CartItem from '@/components/Cart/CartItem';
 
 const Container = styled.div`
 	display: flex;

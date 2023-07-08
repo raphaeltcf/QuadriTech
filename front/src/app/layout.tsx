@@ -1,7 +1,6 @@
 import { Montserrat } from 'next/font/google';
 import './globals.css';
 
-import { FilterContextProvider } from '@/contexts/FilterContext';
 import DefaultProviders from '@/components/DefaultProviders';
 import Header from '@/components/Header';
 

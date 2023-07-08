@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import useWindowDimensions from 'use-window-dimensions';
 import { ProfileCircle } from 'iconsax-react';
 import { styled } from 'styled-components';
@@ -60,23 +60,27 @@ const Header = () => {
 	}, [searchParams]);
 
 	return (
-		<TagHeader>
-			<Logo href='/'>QUADRITECH</Logo>
-			<div>
-				{width > 768 && pathname == '/' && (
-					<PrimaryInputWIcon
-						placeholder='Procurando por algo específico?'
-						value={search}
-						onChange={(event) => handleChange('search', event)}
-					/>
-				)}
-				<Cart />
-				<ProfileCircle
-					size='24'
-					color='var(--text-dark)'
-				/>
-			</div>
-		</TagHeader>
+		<>
+			{pathname !== '/signup' && (
+				<TagHeader>
+					<Logo href='/'>QUADRITECH</Logo>
+					<div>
+						{width > 768 && pathname == '/' && (
+							<PrimaryInputWIcon
+								placeholder='Procurando por algo específico?'
+								value={search}
+								onChange={(event) => handleChange('search', event)}
+							/>
+						)}
+						<Cart />
+						<ProfileCircle
+							size='24'
+							color='var(--text-dark)'
+						/>
+					</div>
+				</TagHeader>
+			)}
+		</>
 	);
 };
 

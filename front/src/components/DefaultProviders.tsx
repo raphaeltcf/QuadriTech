@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { ReactNode } from 'react';
 
 import { FilterContextProvider } from '@/contexts/FilterContext';
-import Login from './login/Login';
+import Login from './Login';
 import { AuthProvider } from '@/contexts/AuthContext';
 
 interface IDefaultProvidersProps {

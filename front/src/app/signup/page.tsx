@@ -2,9 +2,10 @@
 import { useAuthContext } from '@/contexts/AuthContext';
 import { ReactNode, useState } from 'react';
 import * as yup from 'yup';
-import Input from './Input';
-import Button from './Button';
-import { usePathname, useRouter } from 'next/navigation';
+
+import { useRouter } from 'next/navigation';
+import Input from '@/components/Input';
+import Button from '@/components/Button';
 
 const loginSchema = yup.object().shape({
 	email: yup.string().email().required(),
@@ -15,53 +16,24 @@ interface ILoginProps {
 	children: ReactNode;
 }
 
-const Login = ({ children }: ILoginProps) => {
+const SignUp = ({ children }: ILoginProps) => {
 	const { isAuthenticated, login } = useAuthContext();
 
 	const [isLoading, setIsLoading] = useState(false);
 
-	const [email, setEmail] = useState('feijo6622@gmail.com');
-	const [password, setPassword] = useState('12345678');
-
-	const [emailError, setEmailError] = useState('');
-	const [passwordError, setPasswordError] = useState('');
-
-	const pathname = usePathname();
 	const router = useRouter();
 
-	const handleSubmit = () => {
-		setIsLoading(true);
-		loginSchema
-			.validate({ email, password }, { abortEarly: false })
-			.then((dadosValidados) => {
-				login(dadosValidados.email, dadosValidados.password).then(() => {
-					setIsLoading(false);
-				});
-			})
-			.catch((errors: yup.ValidationError) => {
-				console.log(errors);
-				setIsLoading(false);
-				errors.inner.forEach((error) => {
-					if (error.path === 'email') {
-						setEmailError(error.message);
-					} else if (error.path === 'password') {
-						setPasswordError(error.message);
-					}
-				});
-			});
-	};
-
-	if (isAuthenticated || pathname === '/signup') return <>{children}</>;
+	if (isAuthenticated) return <>{children}</>;
 
 	return (
 		<div className='flex h-screen flex-col md:flex-row'>
 			<div className='w-full  h-2/6 bg-gradient-to-t from-orange-400 to-rose-400 md:h-screen md:w-2/5 '>
 				<div className='md:hidden flex flex-col justify-center  h-full'>
 					<h1 className='font-bold text-5xl text-center mb-1'>
-						Bem vindo ao QuadriTech
+						Não possui uma conta?
 					</h1>
 					<p className='text-center text-gray-500 font-medium'>
-						Tecnologia para transformar seu mundo!
+						Não perca tempo, inscreva-se agora mesmo!
 					</p>
 				</div>
 			</div>
@@ -69,45 +41,41 @@ const Login = ({ children }: ILoginProps) => {
 				<div className='flex flex-col justify-evenly items-center w-3/4 mx-auto h-full'>
 					<div className='hidden md:block'>
 						<h1 className='font-bold text-5xl text-center mb-1'>
-							Bem vindo ao QuadriTech
+							Ainda não possui uma conta?
 						</h1>
 						<p className='text-center text-gray-500 font-medium'>
-							Tecnologia para transformar seu mundo!
+							Não perca tempo, inscreva-se agora mesmo!
 						</p>
 					</div>
 					<div className='w-full  mt-4 md:mt-0 '>
 						<Input
+							label='Nome'
+							placeholder='Insira seu nome'
+							type='text'
+						/>
+						<Input
 							label='Email'
 							placeholder='Insira seu email'
 							type='text'
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
 						/>
 						<Input
 							label='Senha'
 							placeholder='Insira sua senha'
 							type='password'
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
 						/>
 					</div>
 					<div className='w-3/4'>
-						<Button
-							onClick={handleSubmit}
-							className='w-full'
-						>
-							Acesse
-						</Button>
-						<div className='text-center  m-3 text-sm text-zinc-600 font-bold flex items-center justify-center gap-2'>
+						<Button className='w-full'>Criar minha conta</Button>
+						<div className='text-center  m-1 text-sm text-zinc-600 font-bold flex items-center justify-center gap-2'>
 							<div className='w-6/12 h-px bg-gray-300'></div>
 							<p>OU</p>
 							<div className='w-6/12 h-px bg-gray-300'></div>
 						</div>
 						<Button
-							onClick={() => router.push('/signup')}
+							onClick={() => router.push('/')}
 							className='w-full '
 						>
-							Crie sua conta
+							Voltar para o login
 						</Button>
 					</div>
 				</div>
@@ -116,4 +84,4 @@ const Login = ({ children }: ILoginProps) => {
 	);
 };
 
-export default Login;
+export default SignUp;

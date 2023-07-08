@@ -140,7 +140,7 @@ const Product = ({ searchParams }: { searchParams: { id: string } }) => {
 				setData(result);
 			}
 		});
-	}, []);
+	}, [id]);
 
 	const handleAddToCart = () => {
 		let cartItems = localStorage.getItem('cart-items');

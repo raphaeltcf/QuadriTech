@@ -10,7 +10,14 @@ const Button = ({ children, className, ...props }: IButtonProps) => {
 		className,
 		'rounded-lg  bg-brand-orange py-3 text-white font-semibold'
 	);
-	return <button className={buttonClassName}>{children}</button>;
+	return (
+		<button
+			className={buttonClassName}
+			{...props}
+		>
+			{children}
+		</button>
+	);
 };
 
 export default Button;

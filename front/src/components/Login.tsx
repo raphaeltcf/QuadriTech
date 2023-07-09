@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import Input from './Input';
 import Button from './Button';
 import { usePathname, useRouter } from 'next/navigation';
+import FormInput from './FormInput';
 
 const loginSchema = yup.object().shape({
 	email: yup.string().email().required(),
@@ -20,8 +21,8 @@ const Login = ({ children }: ILoginProps) => {
 
 	const [isLoading, setIsLoading] = useState(false);
 
-	const [email, setEmail] = useState('feijo6622@gmail.com');
-	const [password, setPassword] = useState('12345678');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 
 	const [emailError, setEmailError] = useState('');
 	const [passwordError, setPasswordError] = useState('');
@@ -39,12 +40,12 @@ const Login = ({ children }: ILoginProps) => {
 				});
 			})
 			.catch((errors: yup.ValidationError) => {
-				console.log(errors);
 				setIsLoading(false);
 				errors.inner.forEach((error) => {
 					if (error.path === 'email') {
 						setEmailError(error.message);
-					} else if (error.path === 'password') {
+					}
+					if (error.path === 'password') {
 						setPasswordError(error.message);
 					}
 				});
@@ -76,19 +77,25 @@ const Login = ({ children }: ILoginProps) => {
 						</p>
 					</div>
 					<div className='w-full  mt-4 md:mt-0 '>
-						<Input
+						<FormInput
 							label='Email'
 							placeholder='Insira seu email'
 							type='text'
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
+							error={!!emailError}
+							errorMessage={emailError}
+							onKeyDown={() => setEmailError('')}
 						/>
-						<Input
+						<FormInput
 							label='Senha'
 							placeholder='Insira sua senha'
 							type='password'
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
+							error={!!passwordError}
+							errorMessage={passwordError}
+							onKeyDown={() => setPasswordError('')}
 						/>
 					</div>
 					<div className='w-3/4'>

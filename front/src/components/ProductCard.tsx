@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 
 import { IProductList } from '@/services/api/products/ProductsService';
+import { formatPrice } from '@/utils/format-price';
 
 const Card = styled.div`
 	display: flex;
@@ -55,7 +56,7 @@ const ProductCard = (props: IProductList) => {
 	const router = useRouter();
 
 	const handleNavigate = () => {
-		router.push(`/product?id=${props.id}`);
+		router.push(`/product?id=${props._id}`);
 	};
 
 	return (
@@ -64,7 +65,7 @@ const ProductCard = (props: IProductList) => {
 			<div>
 				<h3>{props.name}</h3>
 				<Line></Line>
-				<p>R$ {props.price}</p>
+				<p>{formatPrice(props.price)}</p>
 			</div>
 		</Card>
 	);

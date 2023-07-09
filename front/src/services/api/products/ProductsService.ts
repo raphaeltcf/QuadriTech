@@ -5,14 +5,14 @@ import { useFilter } from '@/hooks/useFilter';
 import { Api } from '../axios-config';
 
 export interface IProductList {
-	id: string;
+	_id: string;
 	name: string;
 	image: string;
 	price: number;
 }
 
 export interface IProductDetail {
-	id: string;
+	_id: string;
 	name: string;
 	image: string;
 	category: string;
@@ -38,16 +38,14 @@ const getAll = async (
 	try {
 		const category = getCategoryByType(type);
 		const sort = getFieldByPriority(priority);
-		const url = `/products?_page=${page}&_limit=${process.env.NEXT_PUBLIC_PAGE_LIMIT}&name_like=${filter}&category_like=${category}&_sort=${sort.field}&_order=${sort.order}`;
+		const url = `/products?page=${page}&limit=${process.env.NEXT_PUBLIC_PAGE_LIMIT}&name=${filter}&category=${category}&sort=${sort.field}&order=${sort.order}`;
 
-		const { headers, data } = await Api.get(url);
+		const { data } = await Api.get(url);
 
 		if (data) {
 			return {
-				data,
-				totalCount: Number(
-					headers['x-total-count'] || process.env.NEXT_PUBLIC_PAGE_LIMIT
-				),
+				data: data.products,
+				totalCount: Number(data.totalCount),
 			};
 		}
 
@@ -61,7 +59,7 @@ const getAll = async (
 	}
 };
 
-const getById = async (id: number): Promise<IProductDetail | Error> => {
+const getById = async (id: string): Promise<IProductDetail | Error> => {
 	try {
 		const { data } = await Api.get(`/products/${id}`);
 

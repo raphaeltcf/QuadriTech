@@ -11,14 +11,17 @@ const CartCount = styled.span`
 	border-radius: 100%;
 	width: 17px;
 	height: 17px;
-	padding: 0px 5px;
+	padding: 0px 6px;
 
 	font-size: 0.8em;
 
 	margin-left: -10px;
+	margin-bottom: -10px;
 `;
 
 const CartContainer = styled.div`
+	display: flex;
+	align-items: center;
 	position: relative;
 `;
 

@@ -69,12 +69,12 @@ const CartResultContainer = styled.div`
 	}
 `;
 
-const TotalItem = styled.div<{ isBold: boolean }>`
+const TotalItem = styled.div<{ bold: number }>`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	font-weight: ${(props) => (props.isBold ? '600' : '400')};
+	font-weight: ${(props) => (props.bold === 1 ? '600' : '400')};
 	font-size: 16px;
 	line-height: 150%;
 	margin-bottom: 12px;
@@ -115,7 +115,7 @@ const CartPage = () => {
 
 	const handleUpdateQuantity = (id: string, cart_quantity: number) => {
 		const newValue = value.map((item) => {
-			if (item.id !== id) return item;
+			if (item._id !== id) return item;
 			return { ...item, cart_quantity };
 		});
 		updateLocalStorage(newValue);
@@ -123,7 +123,7 @@ const CartPage = () => {
 
 	const handleDeleteItem = (id: string) => {
 		const newValue = value.filter((item) => {
-			if (item.id !== id) return item;
+			if (item._id !== id) return item;
 		});
 		updateLocalStorage(newValue);
 	};
@@ -142,7 +142,7 @@ const CartPage = () => {
 						{value.map((item) => (
 							<CartItem
 								product={item}
-								key={item.id}
+								key={item._id}
 								handleDelete={handleDeleteItem}
 								handleUpdateQuantity={handleUpdateQuantity}
 							/>
@@ -151,16 +151,16 @@ const CartPage = () => {
 				</CartListContainer>
 				<CartResultContainer>
 					<h3>Resumo do Pedido</h3>
-					<TotalItem isBold={false}>
+					<TotalItem bold={0}>
 						<p>Subtotal de produtos</p>
 						<p>R$ 50,00</p>
 					</TotalItem>
-					<TotalItem isBold={false}>
+					<TotalItem bold={0}>
 						<p>Entrega</p>
 						<p>R$ 40,00</p>
 					</TotalItem>
 					<Divider />
-					<TotalItem isBold>
+					<TotalItem bold={1}>
 						<p>Total</p>
 						<p>R$ 40,00</p>
 					</TotalItem>

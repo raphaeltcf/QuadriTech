@@ -85,8 +85,8 @@ const ProductsList = () => {
 			<ListContainer>
 				{data?.map((product) => (
 					<ProductCard
-						key={product.id}
-						id={product.id}
+						key={product._id}
+						_id={product._id}
 						image={product.image}
 						name={product.name}
 						price={product.price}

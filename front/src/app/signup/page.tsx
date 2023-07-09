@@ -1,29 +1,58 @@
 'use client';
-import { useAuthContext } from '@/contexts/AuthContext';
-import { ReactNode, useState } from 'react';
-import * as yup from 'yup';
-
+import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
+import { Form } from '@unform/web';
+import * as yup from 'yup';
+import { AuthService } from '@/services/api/auth/AuthService';
+import { FormHandles } from '@unform/core';
 
-const loginSchema = yup.object().shape({
-	email: yup.string().email().required(),
-	password: yup.string().required().min(5),
-});
-
-interface ILoginProps {
-	children: ReactNode;
+interface IFormData {
+	username: string;
+	email: string;
+	password: string;
 }
 
-const SignUp = ({ children }: ILoginProps) => {
-	const { isAuthenticated, login } = useAuthContext();
+const formValidationSchema: yup.ObjectSchema<IFormData> = yup.object().shape({
+	username: yup.string().required().min(3),
+	email: yup.string().email().required(),
+	password: yup.string().required().min(8),
+});
 
+export interface IFormErrors {
+	[key: string]: string;
+}
+
+const SignUp = () => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const router = useRouter();
 
-	if (isAuthenticated) return <>{children}</>;
+	const formRef = useRef<FormHandles>(null);
+
+	const handleSubmit = (data: IFormData) => {
+		formValidationSchema
+			.validate(data, { abortEarly: false })
+			.then((validatedData) => {
+				AuthService.register(validatedData).then((result) => {
+					if (result instanceof Error) {
+						alert(result.message);
+					} else {
+						alert('Conta criada com sucesso!');
+						router.push('/');
+					}
+				});
+			})
+			.catch((errors: yup.ValidationError) => {
+				const validationErrors: IFormErrors = {};
+				errors.inner.forEach((error) => {
+					if (!error.path) return;
+					validationErrors[error.path] = error.message;
+				});
+				formRef.current?.setErrors(validationErrors);
+			});
+	};
 
 	return (
 		<div className='flex h-screen flex-col md:flex-row'>
@@ -37,31 +66,38 @@ const SignUp = ({ children }: ILoginProps) => {
 					</p>
 				</div>
 			</div>
-			<main className='w-full  md:w-3/5 '>
+			<Form
+				className='w-full  md:w-3/5 '
+				onSubmit={handleSubmit}
+				ref={formRef}
+			>
 				<div className='flex flex-col justify-evenly items-center w-3/4 mx-auto h-full'>
 					<div className='hidden md:block'>
-						<h1 className='font-bold text-5xl text-center mb-1'>
+						<h1 className='font-bold text-4xl text-center mb-1'>
 							Ainda não possui uma conta?
 						</h1>
 						<p className='text-center text-gray-500 font-medium'>
 							Não perca tempo, inscreva-se agora mesmo!
 						</p>
 					</div>
-					<div className='w-full  mt-4 md:mt-0 '>
+					<div className='w-full  mt-4 md:mt-0'>
 						<Input
 							label='Nome'
 							placeholder='Insira seu nome'
 							type='text'
+							name='username'
 						/>
 						<Input
 							label='Email'
 							placeholder='Insira seu email'
 							type='text'
+							name='email'
 						/>
 						<Input
 							label='Senha'
 							placeholder='Insira sua senha'
 							type='password'
+							name='password'
 						/>
 					</div>
 					<div className='w-3/4'>
@@ -73,13 +109,14 @@ const SignUp = ({ children }: ILoginProps) => {
 						</div>
 						<Button
 							onClick={() => router.push('/')}
-							className='w-full '
+							className='w-full'
+							type='button'
 						>
 							Voltar para o login
 						</Button>
 					</div>
 				</div>
-			</main>
+			</Form>
 		</div>
 	);
 };

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { DefaultPageLayout } from '@/components/DefaultPageLayout';
 import ProductsList from '@/components/ProductsList';
 import FilterBar from '@/components/FilterBar';
+import '@/utils/TraducoesYup';
 
 const PageWrapper = styled.main`
 	display: flex;

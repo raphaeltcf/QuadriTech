@@ -99,7 +99,7 @@ const CartItem = ({
 		<Item>
 			<img src={product.image} />
 			<div>
-				<h4>Caneca de cerâmica rústica</h4>
+				<h4>{product.name}</h4>
 
 				<button
 					onClick={() => handleDelete(product._id)}
@@ -110,11 +110,7 @@ const CartItem = ({
 						color='var(--delete-color'
 					/>
 				</button>
-				<p>
-					Aqui vem um texto descritivo do produto, esta caixa de texto servirá
-					apenas de exemplo para que simule algum texto que venha a ser inserido
-					nesse campo, descrevendo tal produto.
-				</p>
+				<p>{product.description}</p>
 				<div>
 					<SelectQuantity
 						value={product.cart_quantity}

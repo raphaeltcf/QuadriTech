@@ -5,6 +5,7 @@ import { BackButton } from '@/components/BackButton';
 import { styled } from 'styled-components';
 import { IProductInCart } from '@/services/api/products/ProductsService';
 import CartItem from '@/components/Cart/CartItem';
+import { formatPrice } from '@/utils/format-price';
 
 const Container = styled.div`
 	display: flex;
@@ -113,6 +114,17 @@ const CartPage = () => {
 		[]
 	);
 
+	const calculateTotal = (value: IProductInCart[]) => {
+		console.log(value);
+		return value.reduce(
+			(sum, item) => (sum += item.price * item.cart_quantity),
+			0
+		);
+	};
+
+	const cartTotal = formatPrice(calculateTotal(value));
+	const cartTotalWithDelivery = formatPrice(calculateTotal(value) + 1200);
+
 	const handleUpdateQuantity = (id: string, cart_quantity: number) => {
 		const newValue = value.map((item) => {
 			if (item._id !== id) return item;
@@ -136,7 +148,7 @@ const CartPage = () => {
 					<h3>Seu Carrinho</h3>
 					<p>
 						Total ({value.length} Produtos)
-						<span>R$ 50,00</span>
+						<span>{cartTotal}</span>
 					</p>
 					<CartList>
 						{value.map((item) => (
@@ -153,7 +165,7 @@ const CartPage = () => {
 					<h3>Resumo do Pedido</h3>
 					<TotalItem bold={0}>
 						<p>Subtotal de produtos</p>
-						<p>R$ 50,00</p>
+						<p>{cartTotal}</p>
 					</TotalItem>
 					<TotalItem bold={0}>
 						<p>Entrega</p>
@@ -162,7 +174,7 @@ const CartPage = () => {
 					<Divider />
 					<TotalItem bold={1}>
 						<p>Total</p>
-						<p>R$ 40,00</p>
+						<p>{cartTotalWithDelivery}</p>
 					</TotalItem>
 
 					<ShopBtn>Finalizar a compra</ShopBtn>

@@ -3,6 +3,7 @@ import { Trash } from 'iconsax-react';
 import { ChangeEvent } from 'react';
 
 import { IProductInCart } from '@/services/api/products/ProductsService';
+import { formatPrice } from '@/utils/format-price';
 
 interface ICartItemProps {
 	product: IProductInCart;
@@ -92,7 +93,7 @@ const CartItem = ({
 	handleDelete,
 }: ICartItemProps) => {
 	const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-		handleUpdateQuantity(product.id, Number(e.target.value));
+		handleUpdateQuantity(product._id, Number(e.target.value));
 	};
 	return (
 		<Item>
@@ -101,7 +102,7 @@ const CartItem = ({
 				<h4>Caneca de cerâmica rústica</h4>
 
 				<button
-					onClick={() => handleDelete(product.id)}
+					onClick={() => handleDelete(product._id)}
 					aria-label='Deletar'
 				>
 					<Trash
@@ -125,7 +126,7 @@ const CartItem = ({
 						<option value={4}>4</option>
 						<option value={5}>5</option>
 					</SelectQuantity>
-					<span>R$ 50,00 </span>
+					<span>{formatPrice(product.price)} </span>
 				</div>
 			</div>
 		</Item>

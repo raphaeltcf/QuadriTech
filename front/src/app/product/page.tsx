@@ -5,6 +5,7 @@ import {
 	IProductDetail,
 	ProductsService,
 } from '@/services/api/products/ProductsService';
+import { formatPrice } from '@/utils/format-price';
 import { ShoppingBag } from 'iconsax-react';
 import { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
@@ -133,7 +134,7 @@ const Product = ({ searchParams }: { searchParams: { id: string } }) => {
 	const [data, setData] = useState<IProductDetail>();
 
 	useEffect(() => {
-		ProductsService.getById(Number(id)).then((result) => {
+		ProductsService.getById(id).then((result) => {
 			if (result instanceof Error) {
 				alert(result.message);
 			} else {
@@ -173,7 +174,7 @@ const Product = ({ searchParams }: { searchParams: { id: string } }) => {
 						<ProductInfo>
 							<span>{data?.category}</span>
 							<h2>{data?.name}</h2>
-							<span>R$ 40,00</span>
+							<span>{formatPrice(data?.price || 0)}</span>
 							<p>
 								*Frete de R$40,00 para todo o Brasil. Grátis para compras acima
 								de R$900,00.

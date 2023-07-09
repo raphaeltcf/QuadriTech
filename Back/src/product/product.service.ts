@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Model } from 'mongoose';
+import { Model, SortOrder } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateProductDTO } from './dto/create-product.dto';
 import { Product, ProductDocument } from './schemas/product.schema';
@@ -14,25 +14,39 @@ export class ProductService {
 
   async getFilteredProducts(
     filterProductDTO: FilterProductDTO,
-  ): Promise<Product[]> {
-    const { category, search } = filterProductDTO;
-    let products = await this.getAllProducts();
+  ): Promise<{ products: Product[]; totalCount: number }> {
+    const products = await this.getProductsBySort(filterProductDTO);
 
-    if (search) {
-      products = products.filter(
-        (product) =>
-          product.name.includes(search) || product.description.includes(search),
-      );
-    }
-    if (category) {
-      products = products.filter((product) => product.category === category);
-    }
+    const totalCount = await this.productModel.countDocuments().exec();
+    return { products, totalCount };
+  }
+
+  async getProductsBySort(filterProductDTO): Promise<Product[]> {
+    const { category, name, sort, order, limit, page } = filterProductDTO;
+
+    const orderOptions = order.toLowerCase() as SortOrder;
+    const sortOption: { [key: string]: SortOrder } = {
+      [sort]: orderOptions,
+    };
+
+    const query = name ? { name: new RegExp(name, 'i') } : {};
+    const queryCategory = category
+      ? { ...query, category: new RegExp(category, 'i') }
+      : { ...query };
+
+    const products = await this.productModel
+      .find(queryCategory)
+      .sort(sortOption)
+      .skip(limit * (page - 1))
+      .limit(limit)
+      .exec();
     return products;
   }
 
-  async getAllProducts(): Promise<Product[]> {
-    const products = await this.productModel.find().sort({_id: 1}).populate('category').populate('name').exec();
-    return products;
+  async getAllProducts(): Promise<{ products: Product[]; totalCount: number }> {
+    const totalCount = await this.productModel.countDocuments().exec();
+    const products = await this.productModel.find().exec();
+    return { products, totalCount };
   }
 
   async getProduct(id: string): Promise<Product> {

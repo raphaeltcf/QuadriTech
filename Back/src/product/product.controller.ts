@@ -27,6 +27,7 @@ export class ProductController {
       const filteredProducts = await this.productService.getFilteredProducts(
         filterProductDTO,
       );
+
       return filteredProducts;
     } else {
       const allProducts = await this.productService.getAllProducts();

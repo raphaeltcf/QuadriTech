@@ -19,7 +19,6 @@ const auth = async (
 	password: string
 ): Promise<IAuth | Error> => {
 	try {
-		console.log(email, password);
 		const { data } = await Api.post(`/auth/login`, {
 			email,
 			password,

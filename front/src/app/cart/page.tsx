@@ -5,7 +5,14 @@ import { BackButton } from '@/components/BackButton';
 import { styled } from 'styled-components';
 import { IProductInCart } from '@/services/api/products/ProductsService';
 import CartItem from '@/components/Cart/CartItem';
-import { formatPrice } from '@/utils/format-price';
+import { formatPrice, formatStringPrice } from '@/utils/format-price';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { formatCep, getNumericCep } from '@/utils/format-cep';
+import {
+	calculateShipping,
+	calculateTotal,
+	calculateTotalWithDelivery,
+} from '@/services/cartService';
 
 const Container = styled.div`
 	display: flex;
@@ -106,7 +113,29 @@ const ShopBtn = styled.button`
 	font-weight: 500;
 	line-height: 150%;
 	text-transform: uppercase;
+
+	&:disabled {
+		opacity: 0.5;
+	}
 `;
+
+const Input = styled.input`
+	border: 1px solid gray;
+	outline: none;
+	text-align: right;
+	border-radius: 0.3em;
+	width: 170px;
+	padding: 0 5px;
+`;
+
+interface IDeliveryData {
+	cepdestino: string;
+	ceporigem: string;
+	prazopac: string;
+	prazosedex: string;
+	valorpac: string;
+	valorsedex: string;
+}
 
 const CartPage = () => {
 	const { value, updateLocalStorage } = useLocalStorage<IProductInCart[]>(
@@ -114,16 +143,10 @@ const CartPage = () => {
 		[]
 	);
 
-	const calculateTotal = (value: IProductInCart[]) => {
-		console.log(value);
-		return value.reduce(
-			(sum, item) => (sum += item.price * item.cart_quantity),
-			0
-		);
-	};
-
-	const cartTotal = formatPrice(calculateTotal(value));
-	const cartTotalWithDelivery = formatPrice(calculateTotal(value) + 1200);
+	const [cep, setCep] = useState('');
+	const [deliveryData, setDeliveryData] = useState<IDeliveryData>();
+	const [totalValue, setTotalValue] = useState(0);
+	const [totalWithDelivery, setTotalWithDelivery] = useState(0);
 
 	const handleUpdateQuantity = (id: string, cart_quantity: number) => {
 		const newValue = value.map((item) => {
@@ -140,6 +163,23 @@ const CartPage = () => {
 		updateLocalStorage(newValue);
 	};
 
+	const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value;
+		setCep(value);
+		if (value.length === 8) {
+			const data = await calculateShipping(getNumericCep(value));
+			setDeliveryData(data);
+
+			setTotalWithDelivery(
+				calculateTotalWithDelivery(totalValue, data.valorpac)
+			);
+		}
+	};
+
+	useEffect(() => {
+		setTotalValue(calculateTotal(value));
+	}, [value]);
+
 	return (
 		<DefaultPageLayout>
 			<Container>
@@ -148,7 +188,7 @@ const CartPage = () => {
 					<h3>Seu Carrinho</h3>
 					<p>
 						Total ({value.length} Produtos)
-						<span>{cartTotal}</span>
+						<span>{formatPrice(totalValue)}</span>
 					</p>
 					<CartList>
 						{value.map((item) => (
@@ -165,19 +205,40 @@ const CartPage = () => {
 					<h3>Resumo do Pedido</h3>
 					<TotalItem bold={0}>
 						<p>Subtotal de produtos</p>
-						<p>{cartTotal}</p>
+						<p>{formatPrice(totalValue)}</p>
 					</TotalItem>
-					<TotalItem bold={0}>
-						<p>Entrega</p>
-						<p>R$ 40,00</p>
-					</TotalItem>
+					{!!deliveryData ? (
+						<>
+							<TotalItem bold={0}>
+								<p>CEP de destino: </p>
+								<p>{formatCep(deliveryData.cepdestino)}</p>
+							</TotalItem>
+							<TotalItem bold={0}>
+								<p>Prazo de entrega: </p>
+								<p>{deliveryData.prazopac} dias</p>
+							</TotalItem>
+							<TotalItem bold={0}>
+								<p>Valor do frete: </p>
+								<p>{formatStringPrice(deliveryData.valorpac)}</p>
+							</TotalItem>
+						</>
+					) : (
+						<TotalItem bold={0}>
+							<p>Calcular frete:</p>
+							<Input
+								placeholder='Informe seu CEP'
+								value={formatCep(cep)}
+								onChange={handleChange}
+							/>
+						</TotalItem>
+					)}
 					<Divider />
 					<TotalItem bold={1}>
 						<p>Total</p>
-						<p>{cartTotalWithDelivery}</p>
+						<p>{formatPrice(totalWithDelivery)}</p>
 					</TotalItem>
 
-					<ShopBtn>Finalizar a compra</ShopBtn>
+					<ShopBtn disabled={!totalWithDelivery}>Finalizar a compra</ShopBtn>
 				</CartResultContainer>
 			</Container>
 		</DefaultPageLayout>

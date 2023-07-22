@@ -185,11 +185,7 @@ const CartPage = () => {
 			<Container>
 				<CartListContainer>
 					<BackButton navigate='/' />
-					<h3>Seu Carrinho</h3>
-					<p>
-						Total ({value.length} Produtos)
-						<span>{formatPrice(totalValue)}</span>
-					</p>
+
 					<CartList>
 						{value.map((item) => (
 							<CartItem

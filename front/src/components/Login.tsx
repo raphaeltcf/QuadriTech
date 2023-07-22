@@ -56,7 +56,7 @@ const Login = ({ children }: ILoginProps) => {
 
 	return (
 		<div className='flex h-screen flex-col md:flex-row'>
-			<div className='w-full  h-2/6 bg-gradient-to-t from-orange-400 to-rose-400 md:h-screen md:w-2/5 '>
+			<div className='w-full  h-2/6 bg-gradient-to-t from-orange-400 to-rose-400 md:h-screen md:w-1/2 '>
 				<div className='md:hidden flex flex-col justify-center  h-full'>
 					<h1 className='font-bold text-5xl text-center mb-1'>
 						Bem vindo ao QuadriTech
@@ -66,7 +66,7 @@ const Login = ({ children }: ILoginProps) => {
 					</p>
 				</div>
 			</div>
-			<main className='w-full  md:w-3/5 '>
+			<main className='w-full  md:w-1/2 '>
 				<div className='flex flex-col justify-evenly items-center w-3/4 mx-auto h-full'>
 					<div className='hidden md:block'>
 						<h1 className='font-bold text-5xl text-center mb-1'>

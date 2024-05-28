@@ -1,36 +1,40 @@
 # 🛍 QuadriTech
 
 Um E-commerce de equipamentos Eletronicos feito utilizando os Frameworks RestJS no back e NextJS no Front, os dois com TypeScript e Banco de Dados feito em MongoDB.
-Isso é uma colaboração que está sendo feita entre eu e Gabriel Feijo, onde eu estou produzindo o back e ele o front. 
+Isso é uma colaboração que está sendo feita entre eu e Gabriel Feijo, onde eu estou produzindo o back e ele o front.
 
+---
 
-*******
-Tabelas de conteúdo 
- 1. [Experimente](#experimente)
- 2. [Como ele é](#front)
- 2. [Pré requisitos](#prerequisitos)
- 3. [Pondo o E-commece para funcionar:](#funcionando)
- 4. [(Login)]
- 5. [(Register)]
- 6. [(Compra)]
- 7. [(Carrinho)]
- 4. [Features](#features)
- 5. [Feito Utilizando](#built)
+Tabelas de conteúdo
 
-*******
-<div id='experimente'/>  
+1.  [Experimente](#experimente)
+2.  [Como ele é](#front)
+3.  [Pré requisitos](#prerequisitos)
+4.  [Pondo o E-commece para funcionar:](#funcionando)
+5.  [(Login)]
+6.  [(Register)]
+7.  [(Compra)]
+8.  [(Carrinho)]
+9.  [Features](#features)
+10. [Feito Utilizando](#built)
 
-## 👾 Experimente 
+---
+
+<div id='experimente'/>
+
+## 👾 Experimente
 
 Você pode Experimentar clianco aqui no [QuadriTech]().
 
-*******
-<div id='front'/>  
+---
+
+<div id='front'/>
 
 ## 🖼 Como ele é:
 
-*******
-<div id='prerequisitos'/>  
+---
+
+<div id='prerequisitos'/>
 
 ## 🚀 Começo
 
@@ -39,15 +43,16 @@ Estas instruções permitirão que você obtenha uma cópia de trabalho do proje
 ### 📋 Pré-requisitos
 
 Antes de começar, você precisará ter as seguintes ferramentas instaladas em sua máquina:
-[Git](https://git-scm.com), 
-[MongoDB](https://www.mongodb.com/), 
+[Git](https://git-scm.com),
+[MongoDB](https://www.mongodb.com/),
 [NodeJS](https://nodejs.org/en) e
 [Docker](https://www.docker.com/).
 
 Também é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
 
-*******
-<div id='funcionando'/>  
+---
+
+<div id='funcionando'/>
 
 ### 🎲 Colocando o Chatbot para funcionar:
 
@@ -56,7 +61,7 @@ Também é bom ter um editor para trabalhar com o código como [VSCode](https://
 $ git clone https://github.com/raphaeltcf/QuadriTech
 ```
 
-### No Windows: 
+### No Windows:
 
 ```bash
 # Back-End
@@ -65,7 +70,7 @@ $ git clone https://github.com/raphaeltcf/QuadriTech
 $ cd QuadriTech
 
 # Instale as dependencias
-npm install 
+npm install
 
 # Para funcionar:
 $ npm start
@@ -77,16 +82,18 @@ Só abrir o arquivo index.html no seu browser
 ```
 
 ### No Docker
+
 ```bash
 # Acesse a pasta do projeto em terminal/cmd
 $ cd QuadriTech
 
 
-# Inicie o Docker 
+# Inicie o Docker
 $ docker-compose up
 
 
 ```
+
 ### No Linux
 
 ```bash
@@ -94,7 +101,7 @@ $ docker-compose up
 $ cd QuadriTech
 
 
-# Instale as bibliotecas: 
+# Instale as bibliotecas:
 $ sudo apt update
 $ sudo apt install nodejs npm
 $ node -v
@@ -105,13 +112,14 @@ $ sudo apt update
 $ sudo apt install mongodb-org
 $ sudo systemctl status mongod
 
-# Para funcionar: 
+# Para funcionar:
 $ npm start
 
 ```
 
-*******
-<div id='features'/>  
+---
+
+<div id='features'/>
 
 ### ✅ Features
 
@@ -123,10 +131,11 @@ $ npm start
 - [x] Calculando os preços
 - [x] Carrinho de compras
 - [x] Executando em um contêiner Docker
- 
-*******
-<div id='built'/>  
+
+---
+
+<div id='built'/>
 
 ## 🛠️ Feito utilizando
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="40" height="40" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-plain.svg" width="40" height="40" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-line.svg" width="40" height="40" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="40" height="40" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" width="40" height="40" />  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" width="40" height="40" />  
-          
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="40" height="40" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-plain.svg" width="40" height="40" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-line.svg" width="40" height="40" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="40" height="40" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" width="40" height="40" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" width="40" height="40" />

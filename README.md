@@ -5,7 +5,7 @@ Isso é uma colaboração que está sendo feita entre eu e Gabriel Feijo, onde e
 
 ---
 
-Tabelas de conteúdoqewq
+Tabelas de conteúdos
 
 1.  [Experimente](#expearimente)
 2.  [Como ele é](#front)

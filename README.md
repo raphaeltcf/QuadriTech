@@ -7,7 +7,7 @@ Isso é uma colaboração que está sendo feita entre eu e Gabriel Feijo, onde e
 
 Tabelas de conteúdos - 😀
 
-1.  [Experimente](#expearimentes)
+1.  [Experimente](#expearimente)
 2.  [Como ele é](#front)
 3.  [Pré requisitos](#prerequisitos)
 4.  [Pondo o E-commece para funcionar:](#funcionando)
